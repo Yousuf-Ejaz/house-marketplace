@@ -8,22 +8,21 @@ import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
-  
 	return (
 		<>
 			<Router>
 				<Routes>
 					<Route path="/" element={<Explore />} />
 					<Route path="/offers" element={<Offers />} />
-					<Route path="/profile" element={<SignIn />} />
+					<Route path="/profile" element={<Profile />} />
 					<Route path="/sign-up" element={<SignUp />} />
 					<Route path="/sign-in" element={<SignIn />} />
 					<Route
-						path="/forgotPassword"
+						path="/forgot-password"
 						element={<ForgotPassword />}
 					/>
 				</Routes>
-				<Navbar/>
+				<Navbar />
 			</Router>
 		</>
 	);
