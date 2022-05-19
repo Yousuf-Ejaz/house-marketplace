@@ -92,7 +92,7 @@ function CreateListing() {
 
 		if (geolocationEnabled) {
 			const response = await fetch(
-				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${7872373287373}`
 			);
 
 			const data = await response.json();
