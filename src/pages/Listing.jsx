@@ -3,6 +3,11 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css/bundle";
+
 import Spinner from "../components/Spinner";
 import { db } from "../firebase.config";
 import shareIcon from "../assets/svg/shareIcon.svg";
@@ -35,7 +40,39 @@ function Listing() {
 
 	return (
 		<main>
-			{/* Insert Slider Here */}
+			{/* <Swiper slidesPerView={1} > */}
+			{/* {listing.imageUrls.map((url, index) => (
+					<SwiperSlide key={index}>
+						<div
+							style={{
+								background: `url(${listing.imageUrls[index]}) center no-repeat`,
+								backgroundSize: "cover",
+							}}
+							className="swiperSlideDiv"
+						></div>
+					</SwiperSlide>
+				))} */}
+			{/* </Swiper> */}
+
+			<Swiper
+				modules={[Navigation, Pagination, Scrollbar, A11y]}
+				slidesPerView={1}
+				pagination={{ clickable: true }}
+			>
+				{listing.imageUrls.map((url, index) => (
+					<SwiperSlide key={index}>
+						<div
+							style={{
+								background: `url(${listing.imageUrls[index]}) center no-repeat`,
+								backgroundSize: "cover",
+								// height: "225px",
+							}}
+							className="swiperSlideDiv"
+						></div>
+					</SwiperSlide>
+				))}
+			</Swiper>
+
 			<div className="shareIconDiv">
 				<img
 					src={shareIcon}
@@ -102,9 +139,9 @@ function Listing() {
 						scrollWheelZoom={false}
 					>
 						<TileLayer
-						attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-						url="https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png"
-					/>
+							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+							url="https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png"
+						/>
 
 						<Marker
 							position={[
