@@ -39,13 +39,15 @@ function Category() {
 				const querySnap = await getDocs(q);
 
 				const lastVisible = querySnap.docs[querySnap.docs.length - 1];
-
 				setLastFetchedListing(lastVisible);
 
 				const listings = [];
 
 				querySnap.forEach((doc) => {
-					return listings.push({ id: doc.id, data: doc.data() });
+					return listings.push({
+						id: doc.id,
+						data: doc.data(),
+					});
 				});
 
 				setListings(listings);
@@ -58,6 +60,7 @@ function Category() {
 		fetchListings();
 	}, [params.categoryName]);
 
+	// Pagination / Load More
 	const onFetchMoreListings = async () => {
 		try {
 			// Get reference
@@ -76,16 +79,18 @@ function Category() {
 			const querySnap = await getDocs(q);
 
 			const lastVisible = querySnap.docs[querySnap.docs.length - 1];
-
 			setLastFetchedListing(lastVisible);
 
 			const listings = [];
 
 			querySnap.forEach((doc) => {
-				return listings.push({ id: doc.id, data: doc.data() });
+				return listings.push({
+					id: doc.id,
+					data: doc.data(),
+				});
 			});
 
-			setListings((prevState) => [...prevState, listings]);
+			setListings((prevState) => [...prevState, ...listings]);
 			setLoading(false);
 		} catch (error) {
 			toast.error("Could not fetch listings");
@@ -97,10 +102,11 @@ function Category() {
 			<header>
 				<p className="pageHeader">
 					{params.categoryName === "rent"
-						? "Places for Rent"
-						: "Places for Sale"}
+						? "Places for rent"
+						: "Places for sale"}
 				</p>
 			</header>
+
 			{loading ? (
 				<Spinner />
 			) : listings && listings.length > 0 ? (
@@ -126,7 +132,7 @@ function Category() {
 					)}
 				</>
 			) : (
-				<p>No Listings for {params.categoryName}</p>
+				<p>No listings for {params.categoryName}</p>
 			)}
 		</div>
 	);
